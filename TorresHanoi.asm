@@ -31,10 +31,23 @@ loadDiscs:
 	add $a1, $zero, $s5
 	add $a2, $zero, $s7
 	add $a3, $zero, $s6
-#Hanoi(int N, Stack org, Stack dest, Stack aux);
+#Hanoi(int n, Stack org, Stack dest, Stack aux);
 #n    => #a0
 #org  => #a1
 #dest => #a2
 #aux  => #a3
 Hanoi:
+	
+	add $t0, $zero, $a0
+	beq $t0, 1, baseCase #if (n == 1) { baseCase}
+	#else {
+	#Hanoi ( n - 1, org, aux, dest)
+	#Move disc from org to dest
+	#Hanoi (n - 1, aux, dest, org)
+	
+	#}
+	
+	baseCase:
+	#Mov disc from orig to dest
+	
 	
