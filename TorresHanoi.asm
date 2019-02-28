@@ -41,11 +41,15 @@ loadDiscs:
 #dest => #a2
 #aux  => #a3
 Hanoi:
+	addi $sp, $sp, -12
+	sw $a0, 0($sp)
+	sw $t8, 4($sp)
+	sw $ra, 8($sp)
 	add $t0, $zero, $a0
 	beq $t0, 1, baseCase #if (n == 1) { baseCase}
 	#else {
 	#Hanoi ( n - 1, org, aux, dest)
-	#Move disc from org to dest
+	#Move disc from org to dost
 	#Hanoi (n - 1, aux, dest, org)
 	#}
 	
@@ -58,6 +62,11 @@ Hanoi:
 	sw $t8,0($a2)#d.push($t8);
 	addi $a2,$a2,4	
 	
+	#terminando Hanoi
+	lw $a0, 0($sp)
+	lw $t8, 4($sp)
+	lw $ra, 8($sp)
+	addi $sp, $sp, -12
 	jr $ra	
 	
 
