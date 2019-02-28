@@ -27,10 +27,12 @@ loadDiscs:
 	bne $t0, $zero, loop_LD
 	
 	#prepping arguments of Hanoi
-	add $a0, $zero, $s0
-	add $a1, $zero, $s5
+	add $a0, $zero, $s0 
+	add $a1, $zero, $s5 
 	add $a2, $zero, $s7
 	add $a3, $zero, $s6
+	
+	jal Hanoi
 #Hanoi(int n, Stack org, Stack dest, Stack aux);
 #n    => #a0
 #org  => #a1
@@ -44,10 +46,17 @@ Hanoi:
 	#Hanoi ( n - 1, org, aux, dest)
 	#Move disc from org to dest
 	#Hanoi (n - 1, aux, dest, org)
-	
 	#}
 	
+	
 	baseCase:
+	lw $t8,0($a2) # $t8 = d.pop();
+	sw $zero,0($a2)
+	addi $a2,$a2,-4 
+	sw $t8,0($a1)#o.push($t8);
+	addi $a1,$a1,4	
+	
+	jr $ra	
 	#Mov disc from orig to dest
 	
 	
