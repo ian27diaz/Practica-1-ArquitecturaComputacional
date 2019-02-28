@@ -10,11 +10,11 @@ main:
 	addi $s5, $zero,0x1001 #s5 -> origin tower
 	sll $s5, $s5, 16
 	
-	addi $s6, $zero,0x1001 #s6 -> aux tower
+	addi $s6, $zero,0x1001 #s6 -> dist tower
 	sll $s6, $s6, 16
 	add $s6, $s6, 0x0020
 	
-	addi $s7, $zero,0x1001 #s7 -> dest tower
+	addi $s7, $zero,0x1001 #s7 -> aux tower
 	sll $s7, $s7, 16
 	add $s7, $s7, 0x0040
 	
@@ -43,11 +43,42 @@ loadDiscs:
 Hanoi:
 	add $t0, $zero, $a0
 	beq $t0, 1, baseCase #if (n == 1) { baseCase}
+	casoInductivo:
+	
 	#else {
-	#Hanoi ( n - 1, org, aux, dest)
+	#Hanoi ( n - 1, org, dest, aux)
 	#Move disc from org to dest
 	#Hanoi (n - 1, aux, dest, org)
 	#}
+	
+	addi $a0,$a0,-1
+	#hanoi(n-1,org,aux,dest)
+	#en este primer paso del caso en esta llamada el origen siempre es el mismo pero cambios en la torres aux y dest
+	#en cada llamada aux será dest y dest será aux variando en los casos en que llame esta función
+	add $t7,$zero,$a2
+	add $a2,$zero,$a3
+	add $a3,$zero,$t7
+	
+	jal Hanoi
+	
+	#dest.push(o.pop());
+	lw $t8,0($a1) # $t8 = o.pop();
+	sw $zero,0($a1)
+	addi $a1,$a1,-4 
+	sw $t8,0($a2)#d.push($t8);
+	addi $a2,$a2,4	
+	
+	#en este paso del caso en esta llamada el dest siempre es el mismo pero habrá cambios en las torres aux y orig
+	#en cada llamada aux será orig y origin será aux variando en los casos en que llame esta función
+	add $t7,$zero,$a1
+	add $a1,$zero,$a3
+	add $a3,$zero,$t7
+	
+	jal Hanoi
+	#hanoi(n-1,aux,dest,origin)
+	j endHanoi
+	
+	
 	
 	
 	baseCase:
@@ -57,7 +88,7 @@ Hanoi:
 	addi $a1,$a1,-4 
 	sw $t8,0($a2)#d.push($t8);
 	addi $a2,$a2,4	
-	
+	endHanoi:
 	jr $ra	
 	
 
