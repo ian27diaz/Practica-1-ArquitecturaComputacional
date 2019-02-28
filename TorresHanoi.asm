@@ -5,7 +5,7 @@
 .text
 
 main:
-	addi $s0, $zero, 2 #Number of discs
+	addi $s0, $zero, 3#Number of discs
 	#initializing pointers
 	addi $s5, $zero,0x1001 #s5 -> origin tower
 	sll $s5, $s5, 16
@@ -119,7 +119,7 @@ Hanoi:
 	#add $t7, $zero, $s2 #t7 = contador de pila orig
 	#add $s2, $zero, $s4 #s2(orig) = contador de pila aux
 	#add $s4, $zero, $t7 #s4(aux) = contador de pila org
-	
+	addi $a0,$a0,-1 #n-1
 	jal Hanoi #hanoi(n-1,aux,dest,origin)
 	add $t7, $zero, $a1 #ty = aux
 	add $a1, $zero, $a3 #aux = dest
