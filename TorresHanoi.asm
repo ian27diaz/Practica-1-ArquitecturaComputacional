@@ -1,6 +1,6 @@
 #Team members: 
-#Ian Ricardo DÌaz Meda
-#Luis JoaquÌn ¡valos Guzm·n
+#Ian Ricardo D√≠az Meda
+#Luis Joaqu√≠n √Åvalos Guzm√°n
 
 .text
 
@@ -55,7 +55,7 @@ Hanoi:
 	sw $a0, 0($sp)
 	
 	#en este primer paso del caso en esta llamada el origen siempre es el mismo pero cambios en la torres aux y dest
-	#en cada llamada aux ser· dest y dest ser· aux variando en los casos en que llame esta funciÛn
+	#en cada llamada aux ser√° dest y dest ser√° aux variando en los casos en que llame esta funci√≥n
 	#n => #a0
 
 	#Cambiando apuntadores de pilas
@@ -83,8 +83,8 @@ Hanoi:
 	sw $a0, 0($sp)
 	sw $t8, 4($sp)
 	sw $ra, 8($sp)
-	#en este paso del caso en esta llamada el dest siempre es el mismo pero habr· cambios en las torres aux y orig
-	#en cada llamada aux ser· orig y origin ser· aux variando en los casos en que llame esta funciÛn
+	#en este paso del caso en esta llamada el dest siempre es el mismo pero habr√° cambios en las torres aux y orig
+	#en cada llamada aux ser√° orig y origin ser√° aux variando en los casos en que llame esta funci√≥n
 	add $t7,$zero,$a1 #t7 = org
 	add $a1,$zero,$a3 #org = aux
 	add $a3,$zero,$t7 #aux = org
