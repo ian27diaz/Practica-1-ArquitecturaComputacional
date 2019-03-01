@@ -5,7 +5,7 @@
 .text
 
 main:
-	addi $s0, $zero, 3 #Number of discs
+	addi $s0, $zero, 8 #Number of discs
 	#initializing pointers
 	addi $s5, $zero,0x1001 #s5 -> origin tower
 	sll $s5, $s5, 16
